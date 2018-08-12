@@ -5,19 +5,19 @@ const bot = new Telegraf('671427209:AAHXiSMLorX1baVKssIAEm0kQjaM7mYcohw');
 // app.use(Telegraf.log())
 //
 // Start command
-app.command('start', ({ reply }) => {
+bot.command('start', ({ reply }) => {
   reply('Welcome, nice to meet you! I can sell you various products. Just ask.');
 });
-
-bot.use((ctx) => {
-  console.log(ctx.message)
-  console.log('============================')
-  // console.log(ctx.chat)
-  // console.log('============================')
-  // console.log(ctx.from)
-  // console.log('============================')
-  // console.log(ctx.match)
-})
+//
+// bot.use((ctx) => {
+//   console.log(ctx.message)
+//   console.log('============================')
+//   // console.log(ctx.chat)
+//   // console.log('============================')
+//   // console.log(ctx.from)
+//   // console.log('============================')
+//   // console.log(ctx.match)
+// })
 
 bot.start((ctx) => ctx.reply('Welcome'))
 bot.help((ctx) => ctx.reply('Send me a sticker'))
