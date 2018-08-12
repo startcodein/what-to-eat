@@ -51,7 +51,9 @@ function createInvoice(product) {
 }
 
 // Start command
-app.command('start', ({ reply }) => reply('Welcome, nice to meet you! I can sell you various products. Just ask.'))
+app.command('start', ({ reply }) => {
+  reply('Welcome, nice to meet you! I can sell you various products. Just ask.'));
+}
 
 // Show offer
 app.hears(/^what.*/i, ({ replyWithMarkdown }) => replyWithMarkdown(`
