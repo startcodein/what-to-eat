@@ -34,54 +34,6 @@ const bot = new Telegraf(config.token);
 // bot.command('hipster', Telegraf.reply('λ'))
 
 
-
-// Import replies file
-const replies = require('./replies')
- 
-// Extract reply_to_message.message_id field from Telegraf ctx
-// If not present, return null
-const getReplyToMessageId = ctx => (
-    ctx.message.reply_to_message ? ctx.message.reply_to_message.message_id : null
-)
- 
-// This method will send the reply, based on the answer type
-// (text / gif / sticker). See replies.js for objects structure.
-const sendReply = (ctx, reply) => {
-  console.log(reply);
-  
-  // reply method will be the Telegraf method for sending the reply
-  let replyMethod = {
-    text: ctx.reply,
-    gif: ctx.replyWithDocument,
-    sticker: ctx.replyWithSticker
-  }[reply.type]
-  
-  replyMethod(reply.value, {
-    // this will make the bot reply to the original message instead of just sending it
-    reply_to_message_id: getReplyToMessageId(ctx) 
-  })
-}
-
-// /list command - will send all the triggers defined in replies.js.
-bot.command('list', ctx => {
-    ctx.reply(
-        'Available triggers:\n\n' +
-        Object.keys(replies).join('\n')
-    )
-})
-
-// Listen on every text message, if message.text is one of the trigger,
-// send the reply
-bot.on('text', ctx => {
-  let cmd = ctx.message.text.toLowerCase()
-  // console.log(cmd);
-  // console.log(replies);
-  
-  
-  if (cmd in replies)
-    sendReply(ctx, replies[cmd])
-})
-
 bot.on('left_chat_member', ctx => {
   console.log(ctx.message);
   ctx.reply('Oral poyi');
@@ -93,5 +45,16 @@ bot.on('new_chat_members', ctx => {
   console.log('============================')
   ctx.reply('oral chernnu');
 });
+
+// Handle message update
+bot.on('message', (ctx) => {
+  return ctx.reply('Hello')
+})
+
+// Handle sticker or photo update
+bot.on(['sticker', 'photo'], (ctx) => {
+  console.log(ctx.message)
+  return ctx.reply('Cool!')
+})
 
 bot.startPolling()
