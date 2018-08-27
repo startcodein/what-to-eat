@@ -37,7 +37,8 @@ bot.on('new_chat_members', ctx => {
     ctx.message.new_chat_participant.last_name
   )
 
-  ctx.deleteMessage(ctx.message_id);
+  // ctx.deleteMessage(ctx.message_id);
+  ctx.deleteMessage()
 });
 // Good bye message
 const byeMessage = (ctx, firstName='', lastName='' ) => {
@@ -50,6 +51,7 @@ bot.on('left_chat_member', (ctx) => {
     ctx.message.left_chat_participant.first_name,
     ctx.message.left_chat_participant.last_name
   )
+  ctx.deleteMessage()
 });
 
 
