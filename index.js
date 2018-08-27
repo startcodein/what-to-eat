@@ -31,12 +31,13 @@ bot.on('new_chat_members', ctx => {
   console.log('============================')
   console.log(ctx.message);
   console.log('============================')
-  ctx.reply('oral chernnu');
   welcomeMessage(
     ctx,
     ctx.message.new_chat_participant.first_name,
     ctx.message.new_chat_participant.last_name
   )
+
+  ctx.deleteMessage(ctx.message_id);
 });
 // Good bye message
 const byeMessage = (ctx, firstName='', lastName='' ) => {
