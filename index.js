@@ -5,7 +5,8 @@ const Telegraf = require('telegraf');
 // Create a bot using TOKEN provided as environment variable
 const bot = new Telegraf(config.token);
 
-
+// Actions
+const preventBot = require('./actions/preventBot');
 // bot.use(Telegraf.log())
 
 // // Start command
@@ -23,13 +24,32 @@ const bot = new Telegraf(config.token);
 //   console.log(ctx.match)
 // })
 
+/* bot.use((ctx, next) => {
+  const start = new Date()
+  return next(ctx).then(() => {
+    const ms = new Date() - start
+    console.log('Response time %sms', ms)
+  })
+})
+*/
+
+bot.on('text', (ctx, next) => {
+  console.log(ctx.me);
+  ctx.reply('Hello World')
+  return next();
+})
+
+// bot.on('text', ( ctx ) => ctx.reply(`Welcome ${ctx.message.from.first_name} to our group`))
+
+bot.on('new_chat_members', preventBot);
+
 // Welcome message
 const welcomeMessage = (ctx, firstName='', lastName='' ) => {
   ctx.reply(`Welcome ${firstName} ${lastName} to our group`);
 }
 bot.on('new_chat_members', ctx => {
   console.log('============================')
-  console.log(ctx.message);
+  // console.log(ctx.message);
   console.log('============================')
   welcomeMessage(
     ctx,
@@ -38,7 +58,7 @@ bot.on('new_chat_members', ctx => {
   )
 
   // ctx.deleteMessage(ctx.message_id);
-  ctx.deleteMessage()
+  // ctx.deleteMessage()
 });
 // Good bye message
 const byeMessage = (ctx, firstName='', lastName='' ) => {
@@ -51,7 +71,7 @@ bot.on('left_chat_member', (ctx) => {
     ctx.message.left_chat_participant.first_name,
     ctx.message.left_chat_participant.last_name
   )
-  ctx.deleteMessage()
+  // ctx.deleteMessage()
 });
 
 
