@@ -65,4 +65,8 @@ bot.on(['sticker', 'photo'], (ctx) => {
   return ctx.reply('Cool! you put sticker or photo');
 })
 
+bot.command('oldschool', (ctx) => ctx.reply('Hello'))
+bot.command('modern', ({ reply }) => reply('Yo'))
+bot.command('hipster', Telegraf.reply('λ'))
+
 bot.startPolling()
