@@ -1,6 +1,6 @@
+const config = require('./config.json')
 const Telegraf = require('telegraf')
-const { Markup } = Telegraf
-const bot = new Telegraf('671427209:AAHXiSMLorX1baVKssIAEm0kQjaM7mYcohw');
+const bot = new Telegraf(config.token);
 
 // app.use(Telegraf.log())
 //
@@ -24,7 +24,11 @@ bot.help((ctx) => ctx.reply('Send me a sticker'))
 bot.on('sticker', (ctx) => ctx.reply('👍'))
 bot.hears('hi', (ctx) => ctx.reply('Hey there'))
 bot.hears(/buy/i, (ctx) => ctx.reply('Buy-buy'))
-bot.hashtag('kooy', (ctx) => ctx.reply('Your number is'))
+
+bot.command('oldschool', (ctx) => ctx.reply('Hello'))
+bot.command('modern', ({ reply }) => reply('Yo'))
+bot.command('hipster', Telegraf.reply('λ'))
+
 
 bot.command('oldschool', (ctx) => ctx.reply('Hello'))
 bot.command('modern', ({ reply }) => reply('Yo'))
