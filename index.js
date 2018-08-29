@@ -35,6 +35,7 @@ const preventBot = require('./actions/preventBot');
 
 bot.on('text', (ctx, next) => {
   console.log(ctx.me);
+  console.log(ctx.from);
   ctx.reply('Hello World')
   return next();
 })

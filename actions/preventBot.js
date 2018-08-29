@@ -1,3 +1,5 @@
+const link = user => '@' + user.username;
+
 const preventBot = (ctx, next) => {
   const { new_chat_members:newMembers } = ctx.message;
   const { from:invitedUsed } = ctx.message;
@@ -16,9 +18,12 @@ const preventBot = (ctx, next) => {
   // ctx.kickChatMember(chatID, bots.id);
   // ctx.kickChatMember(invitedUsed.id);
 
-  ctx.reply(`ഗ്രൂപ്പിലിട്ട @${bots[0].username} ഇനെ പുറത്താക്കിയിരിക്കുന്നു.
-  അതോടൊപ്പം ഈ ബോട്ടിനെ ഗ്രൂപ്പിൽ ഇട്ട ${invitedUsed.first_name} നെയും പുറത്താക്കിയിരിക്കുന്നു
-  `)
+  for (const bot of bots) {
+    ctx.telegram.kickChatMember(chatID, bot.id);
+  }
+  
+  ctx.reply(`ഗ്രൂപ്പിൽ വന്ന ${bots.map(link).join(', ')} ബോട്ടിനെ പുറത്താക്കിയിരിക്കുന്നു.
+  അതോടൊപ്പം ഈ ബോട്ടിനെ ഗ്രൂപ്പിൽ ചേർത്ത <b>${invitedUsed.first_name}</b> നെയും പുറത്താക്കിയിരിക്കുന്നു`)
 
   return next();
 }
