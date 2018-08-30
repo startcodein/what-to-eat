@@ -50,23 +50,13 @@ bot.on('text', (ctx, next) => {
   // `)
 
 
-  ctx.reply(`Welcome ${ctx.message.from.first_name} to our group`)
-    .then(
-      () => {
-        ctx.deleteMessage(ctx.message_id)
-        console.log('----------');
-        console.log(ctx.chat.id);
-        
-      }
-      // (ctx) => {
-      //   // console.log(chat);
-      //   console.log(ctx.message_id);
-      //   // console.log('========');
-      //   // console.log(chat.id, message_id);
-        
-      //   // () => ctx.deleteMessage(chat.id, message_id)
-      // }
-    );
+  ctx.reply(`Welcome ${ctx.message.from.first_name} to our group`).then(
+    ({ message_id }) => {
+      setTimeout(
+        () => ctx.deleteMessage(message_id),
+      3 * 1000)
+      console.log(message_id)
+  })
   // return next();
 })
 
