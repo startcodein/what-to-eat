@@ -10,10 +10,10 @@ const preventBot = (ctx, next) => {
 
   const bots = newMembers.filter( member => member.is_bot);
 
-  console.log('bots');
-  console.log(bots);
-  console.log(bots[0]);
-  console.log(bots[0].username)
+  // console.log('bots');
+  // console.log(bots);
+  // console.log(bots[0]);
+  // console.log(bots[0].username)
 
   // ctx.kickChatMember(chatID, bots.id);
   // ctx.kickChatMember(invitedUsed.id);
