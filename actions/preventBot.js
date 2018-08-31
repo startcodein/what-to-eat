@@ -11,14 +11,13 @@ const preventBot = (ctx, next) => {
     return next();
   }
 
+  ctx.kickChatMember(invitedUser.id);
+  
   for (const bot of bots) {
     ctx.telegram.kickChatMember(chatID, bot.id);
   }
 
-  ctx.telegram.kickChatMember(invitedUser.id);
-
-  ctx.reply(`ഗ്രൂപ്പിൽ വന്ന ${bots.map(link).join(', ')} ബോട്ടിനെ പുറത്താക്കിയിരിക്കുന്നു. അതോടൊപ്പം ഈ ബോട്ടിനെ ഗ്രൂപ്പിൽ ചേർത്ത ${invitedUser.first_name} ${invitedUser.last_name || ''} നെയും പുറത്താക്കിയിരിക്കുന്നു`)
-  // ctx.replyWithMarkdown(`ഗ്രൂപ്പിൽ വന്ന ${bots.map(link).join(', ')} ബോട്ടിനെ പുറത്താക്കിയിരിക്കുന്നു. അതോടൊപ്പം ഈ ബോട്ടിനെ ഗ്രൂപ്പിൽ ചേർത്ത [${invitedUser.first_name} ${invitedUser.last_name}](tg://user?id=${invitedUser.id}) നെയും പുറത്താക്കിയിരിക്കുന്നു.`)
+  ctx.replyWithMarkdown(`ഗ്രൂപ്പിൽ വന്ന ${bots.map(link).join(', ')} ബോട്ടിനെ പുറത്താക്കിയിരിക്കുന്നു. അതോടൊപ്പം ഈ ബോട്ടിനെ ഗ്രൂപ്പിൽ ചേർത്ത [${invitedUser.first_name} ${invitedUser.last_name}](tg://user?id=${invitedUser.id}) നെയും പുറത്താക്കിയിരിക്കുന്നു.`)
   return next();
 }
 
