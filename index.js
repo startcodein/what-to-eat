@@ -9,7 +9,7 @@ const bot = new Telegraf(config.token);
 const preventBot = require('./actions/preventBot');
 const welcomeMessage = require('./actions/welcomeMessage');
 const byeMessage = require('./actions/byeMessage.js');
-bot.use(Telegraf.log())
+// bot.use(Telegraf.log())
 
 // bot.on('text', welcomeMessage);
 
